@@ -5,6 +5,9 @@ let UserSchema= new mongoose.Schema({
     email:{type:"string", required:true},
     password:{type:"string", required:true},
     method:{type:"string"},
+    cart:[],
+    wishlist:[],
+    order:[],
 },
 {timestamps:true}
 )
