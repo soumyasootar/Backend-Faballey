@@ -4,6 +4,7 @@ const database=require('./config/database');
 const UserAuth = require('./routers/userrouter');
 const product= require('./routers/productrouter');
 const cartrouter = require('./routers/cartrouter');
+const orderrouter = require('./routers/orderrouter');
 require('dotenv').config()
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(cors())
 app.use('/faballey',UserAuth);
 app.use('/faballey',product);
 app.use('/faballey',cartrouter);
+app.use('/faballey',orderrouter);
 
 
 
