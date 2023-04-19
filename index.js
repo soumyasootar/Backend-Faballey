@@ -18,9 +18,12 @@ app.use('/faballey',cartrouter);
 app.use('/faballey',orderrouter);
 app.use('/faballey',wishlistrouter);
 
-// app.get("/faballey",async(req,res)=>{
-//     res.end("welcome to faballey backend")
-// })
+app.get("/faballey",async(req,res)=>{
+    res.end("welcome to faballey backend")
+})
+app.get("/",async(req,res)=>{
+    res.end("welcome to faballey backend")
+})
 
 const port="3002";
 database();
