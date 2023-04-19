@@ -94,47 +94,48 @@ product.post("/cart", async (req, res) => {
   }
 });
 
-product.delete("/cart", async (req, res) => {
-  try {
-    const { userId, productId} = req.body;
-
-    // Check if the user exists
-    const userExists = await users.findById(userId);
-    if (!userExists) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    // Check if the product exists
-    const productExists = await products.findById(productId);
-    if (!productExists) {
-      return res.status(404).json({ message: "Product not found" });
-    }
-
-    // Check if the user already has the product in their cart
-    try {
-      let delprod=await cart.findOneAndDelete({
-        user: userId,
-        "products.product": productId,
-      });
-      if(delprod){
-        res.status(200).json({ message: "Product deleted from cart" });
-      }else{
-        return res.status(404).json({ message: "This Product isnt Available in cart of the user given" });
-      }
-    } catch (error) {
-      console.log("error: ", error);
-      
-      // If the product doesn't exist in the cart, throw error 
-      return res.status(404).json({ message: "This Product isnt Available in cart of the user given" });
-    }
-    res.status(200).json({ message: "Product deleted from cart" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server Error" });
-  }
-});
-
 module.exports = product;
+
+// product.delete("/cart", async (req, res) => {
+//   try {
+//     const { userId, productId} = req.body;
+
+//     // Check if the user exists
+//     const userExists = await users.findById(userId);
+//     if (!userExists) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     // Check if the product exists
+//     const productExists = await products.findById(productId);
+//     if (!productExists) {
+//       return res.status(404).json({ message: "Product not found" });
+//     }
+
+//     // Check if the user already has the product in their cart
+//     try {
+//       let delprod=await cart.findOneAndDelete({
+//         user: userId,
+//         "products.product": productId,
+//       });
+//       if(delprod){
+//         res.status(200).json({ message: "Product deleted from cart" });
+//       }else{
+//         return res.status(404).json({ message: "This Product isnt Available in cart of the user given" });
+//       }
+//     } catch (error) {
+//       console.log("error: ", error);
+      
+//       // If the product doesn't exist in the cart, throw error 
+//       return res.status(404).json({ message: "This Product isnt Available in cart of the user given" });
+//     }
+//     res.status(200).json({ message: "Product deleted from cart" });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: "Server Error" });
+//   }
+// });
+
 // product.post("/cart", async (req, res) => {
 //   try {
 //     const body = req.body;
