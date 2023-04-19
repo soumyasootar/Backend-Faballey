@@ -4,9 +4,20 @@ let {
   register,
   login,
   loginByGoogle,
+  getusers
 } = require("../controller/userController");
 const authLoginUser = require("../Middleware/auth.middleware");
 const UserAuth = express.Router();
+
+UserAuth.get("/users", async (req, res) => {
+  try{
+let data = await getusers();
+res.status(200).send(data);
+  }catch(e){
+    res.status(500).send("Something went wrong");
+  }
+
+})
 
 UserAuth.post("/register", async function (req, res) {
   console.log("register");
