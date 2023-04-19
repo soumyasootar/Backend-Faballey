@@ -95,4 +95,26 @@ cartrouter.delete("/cart", async (req, res) => {
   }
 });
 
+cartrouter.get("/cart/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Check if the user exists
+    const userExists = await users.findById(userId);
+    if (!userExists) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Find all products in the cart for the specified user
+    const cartItems = await cart.find({ user: userId }).populate("products.product");
+    console.log("cartItems: ", cartItems);
+    const productsCart = cartItems.map(item => item.products[0].product);
+    console.log("productsCart: ", productsCart);
+    res.status(200).json({ productsCart });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 module.exports = cartrouter;

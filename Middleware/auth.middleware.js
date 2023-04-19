@@ -1,27 +1,25 @@
-const {loggedInUser}=require('../controller/userController');
+const { loggedInUser } = require("../controller/userController");
 
 async function authLoginUser(req, res, next) {
-    try{
-const brearHeader=req.headers['authorization'];
-if(typeof brearHeader !== 'undefined') {
-    const[prefix,token] = brearHeader.split(' ');
- const verification=await loggedInUser(token)
- req.verification=verification;
- next();
-}else{
-    return res.status(500).send({
-        error: 'Something went wrong'
-    })
-}
-    }catch(e){
-        return res.status(500).send({
-            error: 'Something went wrong'
-        })
+  try {
+    const brearHeader = req.headers["authorization"];
+    if (typeof brearHeader !== "undefined") {
+      const [prefix, token] = brearHeader.split(" ");
+      const verification = await loggedInUser(token);
+      req.verification = verification;
+      next();
+    } else {
+      return res.status(500).send({
+        error: "Something went wrong",
+      });
     }
+  } catch (e) {
+    return res.status(500).send({
+      error: "Something went wrong",
+    });
+  }
 }
-module.exports =authLoginUser;
-
-
+module.exports = authLoginUser;
 
 // const user = JSON.parse(localStorage.getItem("userDetail")) || [];
 //     const loging = useGoogleLogin({

@@ -49,6 +49,27 @@ wishlistrouter.post("/wishlist", async (req, res) => {
   }
 });
 
+wishlistrouter.get("/wishlist/:userId", async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Check if the user exists
+    const userExists = await users.findById(userId);
+    if (!userExists) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Find all products in the order cart for the specified user
+    const cartItems = await wishlist.find({ user: userId }).populate("wishlists.product");
+    const wishlistsCart = cartItems.map(item => item.orders[0].product);
+    console.log("wishlistsCart: ", wishlistsCart);
+    res.status(200).json({ wishlistsCart });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
 // wishlistrouter.delete("/wishlist", async (req, res) => {
 //   try {
 //     const { userId, productId } = req.body;
