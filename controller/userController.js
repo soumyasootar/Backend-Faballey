@@ -68,11 +68,9 @@ async function loggedInUser(token) {
 }
 
 async function loginByGoogle(data){
-    // console.log(data.email);
     let userExist = await User.findOne({email:data.email});
     if(userExist){ 
         userExist=userExist.toJSON();
-        // console.log(userExist);
         let token=await generateToken(userExist);
         userExist.token=token;
         return {token:token};
@@ -85,6 +83,12 @@ async function loginByGoogle(data){
         return {token:token};
 }
 
+
+async function getusers(){
+    let data= await User.find();
+    return data;
+}
+
 module.exports = {
-    register,login,loggedInUser,loginByGoogle,
+    register,login,loggedInUser,loginByGoogle,getusers
 }
