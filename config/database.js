@@ -6,6 +6,7 @@ async function database(){
     .then(()=>{
         console.log('MongoDb Database connected');
     }).catch((e)=>{
+        console.log("error: ", e);
         console.log('Error connecting MongoDB');
     })
 }
