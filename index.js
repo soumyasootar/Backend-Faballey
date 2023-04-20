@@ -31,7 +31,8 @@ app.get("/",async(req,res)=>{
 
 
 
-const port="3002";
+// const port=3002;
+const port = process.env.PORT || 3002
 database();
 app.listen(port,() => {
     console.log("listening on port "+`http://localhost:${port}/faballey`);
