@@ -6,7 +6,7 @@ let ProductSchema= new mongoose.Schema({
     discount:{type:"string", required:true},
     price2:{type:"string"},
     price1:{type:"string", required:true},
-    colour:{type:"string", required:true},
+    colour:{type:"string"},
     site:{type:"string", required:true},
     img1:{type:"string"},
     img2:{type:"string"},

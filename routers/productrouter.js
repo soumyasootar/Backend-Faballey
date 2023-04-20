@@ -10,9 +10,9 @@ const users = require("../models/usermodel");
 const cart = require("../models/cartmodel");
 const products = require("../models/productmodel");
  
-const product = express.Router();
+const productrouter = express.Router();
 
-product.get("/tops", async (req, res) => {
+productrouter.get("/tops", async (req, res) => {
   try {
     const response = req.query;
     const data = await getProductTops(response);
@@ -25,7 +25,7 @@ product.get("/tops", async (req, res) => {
   }
 });
 
-product.get("/dress", async (req, res) => {
+productrouter.get("/dress", async (req, res) => {
   try {
     const response = req.query;
     const data = await getProductDresses(response);
@@ -38,7 +38,7 @@ product.get("/dress", async (req, res) => {
   }
 });
 
-product.post("/products", async (req, res) => {
+productrouter.post("/products", async (req, res) => {
   try {
     const body = req.body;
     const data = await createOne(body);
@@ -50,4 +50,4 @@ product.post("/products", async (req, res) => {
   }
 });
 
-module.exports = product;
+module.exports = productrouter;
