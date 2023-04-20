@@ -10,12 +10,12 @@ async function authLoginUser(req, res, next) {
       next();
     } else {
       return res.status(500).send({
-        error: "Something went wrong",
+        error: "Something went wrong in authLoginuser",
       });
     }
   } catch (e) {
     return res.status(500).send({
-      error: "Something went wrong",
+      error: "Something went wrong in middleware",
     });
   }
 }

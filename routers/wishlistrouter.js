@@ -61,7 +61,7 @@ wishlistrouter.get("/wishlist/:userId", async (req, res) => {
 
     // Find all products in the order cart for the specified user
     const cartItems = await wishlist.find({ user: userId }).populate("wishlists.product");
-    const wishlistsCart = cartItems.map(item => item.orders[0].product);
+    const wishlistsCart = cartItems.map(item => item.wishlists[0].product);
     console.log("wishlistsCart: ", wishlistsCart);
     res.status(200).json({ wishlistsCart });
   } catch (err) {
