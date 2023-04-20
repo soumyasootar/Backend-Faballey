@@ -1,7 +1,7 @@
 const express = require("express");
 const authLoginUser = require("../Middleware/auth.middleware");
 const {
-  getproductTops,
+  getProductTops,
   getProductDresses,
   createOne,
   AddCart,
@@ -15,8 +15,7 @@ const product = express.Router();
 product.get("/tops", async (req, res) => {
   try {
     const response = req.query;
-    console.log(rating);
-    const data = await getproductTops(response);
+    const data = await getProductTops(response);
     res.status(200).send(data);
   } catch (err) {
     console.error(err.message);
@@ -29,7 +28,6 @@ product.get("/tops", async (req, res) => {
 product.get("/dress", async (req, res) => {
   try {
     const response = req.query;
-    console.log(rating);
     const data = await getProductDresses(response);
     res.status(200).send(data);
   } catch (err) {
