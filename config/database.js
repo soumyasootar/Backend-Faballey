@@ -7,7 +7,6 @@ async function database(){
         console.log('MongoDb Database connected');
     }).catch((e)=>{
         console.log('Error connecting MongoDB');
-        process.exit(1);
     })
 }
 //user-faballeyindia1
