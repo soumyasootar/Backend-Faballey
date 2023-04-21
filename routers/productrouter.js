@@ -15,7 +15,6 @@ const product = express.Router();
 product.get("/tops", async (req, res) => {
   try {
     const response = req.query;
-    console.log(rating);
     const data = await getproductTops(response);
     res.status(200).send(data);
   } catch (err) {
@@ -29,7 +28,6 @@ product.get("/tops", async (req, res) => {
 product.get("/dress", async (req, res) => {
   try {
     const response = req.query;
-    console.log(rating);
     const data = await getProductDresses(response);
     res.status(200).send(data);
   } catch (err) {

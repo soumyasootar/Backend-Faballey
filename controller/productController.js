@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const product = require("../models/productmodel");
 
-async function getProductTops({ title, q, price1, limit, page }) {
+async function getproductTops({ title, q, price1, limit, page }) {
   const filters = {};
 
   if (title) filters.Title = new RegExp(title, "i");
@@ -55,4 +55,4 @@ async function AddCart({ _id }) {
   }
 }
 
-module.exports = { getProductTops, getProductDresses, createOne, AddCart };
+module.exports = { getproductTops, getProductDresses, createOne, AddCart };

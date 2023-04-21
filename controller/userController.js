@@ -22,11 +22,11 @@ async function verifyToken(token) {
 
 async function register(data){
     let userExist= await User.findOne({email:data.email});
+    if(userExist){ throw new Error('User already exists with the given email')}
     const a=bcrypt.hash(data.password, SALT_ROUND)
    data.password =await a;
 //    console.log(a);
-    // console.log(data.email);
-    if(userExist){ throw new Error('User already exists with the given email')}
+    console.log(data.email);
     let user = await User.create({name:data.name,email:data.email,password:data.password,method:"ByEmail&password"});
     user.toJSON();
     delete user.password;

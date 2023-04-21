@@ -29,8 +29,8 @@ cartrouter.post("/cart", async (req, res) => {
     if (cartItem) {
       // If the product already exists in the cart, update the quantity
       await cart.findOneAndUpdate(
-        { user: userId, "products.product": productId },
-        { $inc: { "products.$.quantity": quantity } }
+        { user: userId, "products.product": productId},
+       { "products.$.quantity": quantity } 
       );
     } else {
       // If the product doesn't exist in the cart, add it
@@ -88,7 +88,7 @@ cartrouter.delete("/cart", async (req, res) => {
           message: "This Product isnt Available in cart of the user given",
         });
     }
-    res.status(200).json({ message: "Product deleted from cart" });
+  //   res.status(200).json({ message: "Product deleted from cart" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server Error" });
@@ -108,7 +108,7 @@ cartrouter.get("/cart/:userId", async (req, res) => {
     // Find all products in the cart for the specified user
     const cartItems = await cart.find({ user: userId }).populate("products.product");
     console.log("cartItems: ", cartItems);
-    const productsCart = cartItems.map(item => item.products[0].product);
+    const productsCart = cartItems.map(item=> item.products[0]);
     console.log("productsCart: ", productsCart);
     res.status(200).json({ productsCart });
   } catch (err) {
