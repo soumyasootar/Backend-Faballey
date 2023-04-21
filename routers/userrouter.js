@@ -20,10 +20,10 @@ res.status(200).send(data);
 })
 
 UserAuth.post("/register", async function (req, res) {
-  console.log("register");
+  // console.log("register");
   let data = req.body;
   try {
-    console.log(data);
+    // console.log(data);
     let user = await register(data);
     res.status(200).send("user successfully registered");
   } catch (e) {
