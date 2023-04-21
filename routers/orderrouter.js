@@ -4,7 +4,6 @@ const cart = require("../models/cartmodel");
 const products = require("../models/productmodel");
 const order = require("../models/ordermodel");
 
-
 const orderrouter = express.Router();
 
 orderrouter.post("/order", async (req, res) => {
@@ -28,19 +27,21 @@ orderrouter.post("/order", async (req, res) => {
       user: userId,
       "orders.product": productId,
     });
-    if (cartItem) {
-      // If the product already exists in the order, update the quantity
-      await order.findOneAndUpdate(
-        { user: userId, "orders.product": productId },
-        { $inc: { "orders.$.quantity": quantity } }
-      );
-    } else {
-      // If the product doesn't exist in the order, add it
-      await order.create({
-        user: userId,
-        orders: [{ product: productId, quantity: quantity }],
-      });
-    }
+
+    // If the product doesn't exist in the order, add it
+    await order.create({
+      user: userId,
+      orders: [{ product: productId, quantity: quantity }],
+    });
+
+    // if (cartItem) {
+    //   // If the product already exists in the order, update the quantity
+    //   await order.findOneAndUpdate(
+    //     { user: userId, "orders.product": productId },
+    //     { $inc: { "orders.$.quantity": quantity } }
+    //   );
+    // } else {
+    // }
 
     res.status(200).json({ message: "Product added to ordercart" });
   } catch (err) {
@@ -74,21 +75,17 @@ orderrouter.delete("/order", async (req, res) => {
       if (delprod) {
         res.status(200).json({ message: "Product deleted from order" });
       } else {
-        return res
-          .status(404)
-          .json({
-            message: "This Product isnt Available in order of the user given",
-          });
+        return res.status(404).json({
+          message: "This Product isnt Available in order of the user given",
+        });
       }
     } catch (error) {
       console.log("error: ", error);
 
       // If the product doesn't exist in the cart, throw error
-      return res
-        .status(404)
-        .json({
-          message: "This Product isnt Available in order of the user given",
-        });
+      return res.status(404).json({
+        message: "This Product isnt Available in order of the user given",
+      });
     }
     res.status(200).json({ message: "Product deleted from order cart" });
   } catch (err) {
@@ -108,9 +105,11 @@ orderrouter.get("/order/:userId", async (req, res) => {
     }
 
     // Find all products in the order cart for the specified user
-    const cartItems = await order.find({ user: userId }).populate("orders.product");
+    const cartItems = await order
+      .find({ user: userId })
+      .populate("orders.product");
     console.log("cartItems: ", cartItems);
-    const ordersCart = cartItems.map(item => item.orders[0].product);
+    const ordersCart = cartItems.map((item) => item.orders[0].product);
     console.log("ordersCart: ", ordersCart);
     res.status(200).json({ ordersCart });
   } catch (err) {
