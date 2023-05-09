@@ -8,6 +8,7 @@ const cartrouter = require('./routers/cartrouter');
 const orderrouter = require('./routers/orderrouter');
 const wishlistrouter = require('./routers/wishlistrouter');
 const product = require('./models/productmodel');
+const cowsay = require("cowsay");
 require('dotenv').config()
 
 const app = express();
@@ -19,12 +20,107 @@ app.use('/faballey',productrouter);
 app.use('/faballey',cartrouter);
 app.use('/faballey',orderrouter);
 app.use('/faballey',wishlistrouter);
+var figlet = require("figlet");
+
+
 
 app.get("/faballey",async(req,res)=>{
-    res.end("welcome to faballey backend")
+    figlet("welcome to faballey backend", function (err, data) {
+        if (err) {
+          console.log("Something went wrong...");
+          console.dir(err);
+          return;
+        }
+        console.log(data);
+    });
+    res.write("Welcome To Faballey Backend\n")
+    res.write("\n")
+    res.write("Routes :- \n ")
+    res.write("\n ")
+    res.write("User Routes:- \n ")
+    res.write("https://backend-faballey.vercel.app/faballey/loggedInUser GET")
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/login POST")
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/register POST")
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/users GET" )
+    res.write("\n ")
+    res.write("\n ")
+    res.write("Order Routes:- \n ")
+    res.write("https://backend-faballey.vercel.app/faballey/order  POST DELETE" ) 
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/order/:userId GET")
+    res.write("\n ")
+    res.write("\n ")
+    res.write("Cart Routes:- \n ")
+    res.write("https://backend-faballey.vercel.app/faballey/cart  POST DELETE" ) 
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/cart/:userId GET")
+    res.write("\n ")
+    res.write("\n ")
+    res.write("WishList Routes:- \n ")
+    res.write("https://backend-faballey.vercel.app/faballey/wishlist  POST DELETE" ) 
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/wishlist/:userId GET")
+    res.write("\n ")
+    res.write("\n ")
+    res.write("Product Routes:- \n ")
+    res.write("https://backend-faballey.vercel.app/faballey/tops GET")
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/dress GET")
+    res.write("\n ")
+    res.write("\n ")
+    res.end("----------x-------------")
 })
 app.get("/",async(req,res)=>{
-    res.end("welcome to faballey backend")
+    figlet("welcome to faballey backend", function (err, data) {
+        if (err) {
+          console.log("Something went wrong...");
+          console.dir(err);
+          return;
+        }
+        console.log(data);
+    });
+    res.write("Welcome To Faballey Backend\n")
+    res.write("\n")
+    res.write("Routes :- \n ")
+    res.write("\n ")
+    res.write("User Routes:- \n ")
+    res.write("https://backend-faballey.vercel.app/faballey/loggedInUser GET")
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/login POST")
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/register POST")
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/users GET" )
+    res.write("\n ")
+    res.write("\n ")
+    res.write("Order Routes:- \n ")
+    res.write("https://backend-faballey.vercel.app/faballey/order  POST DELETE" ) 
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/order/:userId GET")
+    res.write("\n ")
+    res.write("\n ")
+    res.write("Cart Routes:- \n ")
+    res.write("https://backend-faballey.vercel.app/faballey/cart  POST DELETE" ) 
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/cart/:userId GET")
+    res.write("\n ")
+    res.write("\n ")
+    res.write("WishList Routes:- \n ")
+    res.write("https://backend-faballey.vercel.app/faballey/wishlist  POST DELETE" ) 
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/wishlist/:userId GET")
+    res.write("\n ")
+    res.write("\n ")
+    res.write("Product Routes:- \n ")
+    res.write("https://backend-faballey.vercel.app/faballey/tops GET")
+    res.write("\n ")
+    res.write("https://backend-faballey.vercel.app/faballey/dress GET")
+    res.write("\n ")
+    res.write("\n ")
+    res.end("----------x-------------")
 })
 
 
